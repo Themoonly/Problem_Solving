@@ -1,0 +1,9 @@
+#ตรวจสอบเลขคู่และเลขคี่
+
+print("***check even or odd number***")
+
+number = int(input("Enter a number: "))
+if number % 2 == 0:
+    print("The number is even.")
+else:
+    print("The number is odd.")
