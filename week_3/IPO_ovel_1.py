@@ -9,11 +9,13 @@ while True:
             total = hour * paylate
             print(f"paylate_b {total}")
         else:
-            late_1 = (hour - 160) * (1.5*paylate) +(160 * paylate)
+            late_1 = (160 - paylate) * ((hour - 160) * (paylate * 1.5))
+
             print(f"paylate_a {late_1:.2f}")
 
         print("**Program is continue**")
         continue
+    
     else:
         print("**Program break now**")
         break
