@@ -9,7 +9,7 @@ def num_odd_even(number):
         else:
             num_odd += num
     return num_even,num_odd
-    
+
 number = int(input("enter number : "))
 
 start_time = time.time()
@@ -20,4 +20,4 @@ stop_time = time.time()
 
 print(f"sum of odd number = {num_odd}")
 print(f"sum of odd number = {num_even}")
-print(f"number = {number}, time = {stop_time - start_time:.6f}, Big O = ??")
+print(f"number = {number}, time = {stop_time - start_time}, Big O = O(n)")
