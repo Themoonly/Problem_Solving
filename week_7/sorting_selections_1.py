@@ -20,10 +20,9 @@ for sort_score in range(len(list_student)):
             list_student[sort_score] = list_student[position_max]
             list_student[position_max] = temp
 
-print("\n--sort score--")
+print("\n--sort score(selections)--")
 for sorted_score in list_student:
     print(f"name {sorted_score[0]} : score {sorted_score[1]}")
-
 
 print("\n--top 3 hightest score--")
 top_student = list_student[:3]
@@ -50,7 +49,6 @@ for student in top_student:
     print(f" Top {round} : {student[0]} : {student[1]} ")
     round += 1
 
-
 search_score = float(input("\nEnter student score to search: "))  
 found = False
 
@@ -60,4 +58,4 @@ for student in list_student:
         found = True
 
 if not found:
-    print("Student with this score not found.")
+    print(f"Student with this score not found. {search_score}")
