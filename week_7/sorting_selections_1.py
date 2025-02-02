@@ -25,9 +25,9 @@ for sorted_score in list_student:
     print(f"name {sorted_score[0]} : score {sorted_score[1]}")
 
 print("\n--top 3 hightest score--")
-top_student = list_student[:3]
+top_hightest_student = list_student[:3]
 round = 1
-for student in top_student:
+for student in top_hightest_student:
     print(f" Top {round} : {student[0]} : {student[1]} ")
     round += 1
 
@@ -43,9 +43,9 @@ for sort_score in range(len(list_student)):
             list_student[sort_score] = list_student[position_max]
             list_student[position_max] = temp
 
-top_student = list_student[-3:]
-round = len(list_student) - 2
-for student in top_student:
+top_lowest_student = list_student[-3:]
+round = len(list_student)
+for student in top_lowest_student:
     print(f" Top {round} : {student[0]} : {student[1]} ")
     round += 1
 
