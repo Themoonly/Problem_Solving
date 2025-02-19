@@ -1,50 +1,64 @@
+#6706022510395 ธีรยุทธ ปาแก้ว
+#6706022510280 ขจรศักดิื ศรีอุบล 
+#6706022510298 ภูริบัญชร เข็มเงิน
 def insert_data_country(data_dict):
     country = input("insert new country : ")
-    if country.lower() not in data_dict:
+    country = country.lower()
+    if country not in data_dict:
         data_dict[country] = {}
-        print(f"insert new country : {country}")
+        print("-----New country successfully added-----")
     else:
-        print(f"can't insert {country}")
+        print("-----can't insert-----")
 def insert_data_region(data_dict):
-    country  = input("insert new region : ")
+    country  = input("Search your country : ")
+    country = country.lower()
     if country in data_dict:
         region = input("insert new region : ")
         if region not in data_dict[country]:
             data_dict[country][region] = []
-            print(f"insert new region {region} to {country}")
+            print("-----New country successfully added-----")
         else:
-            print(f"can't insert {region} to {country}")
+            print("-----can't insert-----")
     else:
         print(f"not found {country}")
 def insert_data_province(data_dict):
-    country  = input("insert new region : ")
+    country  = input("Search your country : ")
+    country = country.lower()
     if country in data_dict:
-        region = input("insert new region : ")
+        region = input("Search your region : ")
+        region = region.lower()
         if region in data_dict[country]:
             province = input("insert new province : ")
+            province = province.lower()
             if province not in data_dict[country][region]:
                 data_dict[country][region].append(province)
-                print(f"insert {province} to {region} in {country}")
+                print(f"insert {province} in {region} at {country}")
+                print("-----New country successfully added-----")
             else:
-                print(f"can't insert {province} to {region}")
+                print(f"can't insert {province} in {region}")
+                print("-----can't insert-----")
         else:
             print(f"not found {region}")
+            print("-----can't insert-----")
     else:
         print(f"not found {country}")
+        print("-----can't insert-----")
 
 def update_country(data_dict):
-    country = input("select country for chang : ")
-    if country in data_dict:
-        new_country = input(f"Enter new name for {country}: ")
-        # data_dict = new_country
-        data_dict[new_country] = data_dict.pop(country)
-        # data_dict.update({data_dict : new_country})
-
-        print(f"Updated {country} to {new_country}")
-    else:
+    country = input("Select country for change: ")
+    country = country.lower()
+    if country not in data_dict:
         print(f"Country {country} not found!")
+    else:
+        new_country = input(f"Enter new name for {country}: ")
+        # Update the dictionary by renaming the country
+        data_dict[new_country] = data_dict.pop(country)
+        print(f"Updated {country} to {new_country}")
+        
+
 def update_region(data_dict):
     country = input("select country : ")
+    country = country.lower()
     if country in data_dict:
         region = input("select region for chang : ")
         if region in data_dict[country]:
@@ -57,6 +71,7 @@ def update_region(data_dict):
         print(f"country {country} not found")
 def update_province(data_dict):
     country = input("Select country : ")
+    country = country.lower()
     if country in data_dict:
         region = input("Select region : ")
         if region in data_dict[country]:
@@ -76,28 +91,39 @@ def update_province(data_dict):
 
 def search_country(data_dict):
     country = input("search country : ")
+    country = country.lower()
     if country in data_dict:
         print(f"country : {country}")
     else:
         print(f"can't find : {country}")
 def search_region(data_dict):
-    region = input("search region : ")
-    for key_country , country in data_dict.items():
+    region = input("Search region: ")
+    region = region.lower()
+    found = False
+    
+    for key_country, country in data_dict.items():
         if region in country:
-            print(f"region : {region} in {key_country}")
-        else:
-            print(f"can't find : {region} ")
+            print(f"Region: {region} at {key_country}")
+            found = True
+    if not found:
+        print(f"Can't find: {region}")
+
+
 def search_province(data_dict):
     province = input("search province : ")
+    province = province.lower()
+    found = False
     for key_conutry , country in data_dict.items():
-        for key_region , region in country:
+        for key_region , region in country.items():
             if province in region:
                 print(f"province : {province} in {key_region} at {key_conutry}")
-            else:
-                print(f"can't find : {province}")
+                found = True
+    if not found:
+        print(f"can't find : {province}")
 
 def delete_country(data_dict):
     country = input("select  country : ")
+    country = country.lower()
     if country in data_dict:
         data_dict.pop(country)
         print(f"delete country : {country}")
@@ -105,8 +131,10 @@ def delete_country(data_dict):
         print(f"can't found : {country}")
 def delete_region(data_dict):
     country = input("select  country : ")
+    country = country.lower()
     if country in data_dict:
         region = input("select region : ")
+        region = region.lower()
         if region in data_dict[country]:
             data_dict[country].pop(region)
             print(f"delete region : {region}")
@@ -116,12 +144,15 @@ def delete_region(data_dict):
         print(f"can't found : {country}")
 def delete_province(data_dict):
     country = input("select  country : ")
-    if country in data_dict:
+    country = country.lower()
+    if country.lower() in data_dict:
         region = input("select region : ")
+        region = region.lower()
         if region in data_dict[country]:
             province = input("select province : ")
+            province = province.lower()
             if province in data_dict[country][region]:
-                data_dict[country][region].pop(province)
+                data_dict[country][region].remove(province)
             else:
                 print(f"can't found : {province}")
         else:
@@ -130,10 +161,32 @@ def delete_province(data_dict):
         print(f"can't found : {country}")
 
 def view_data(data_dict):
-    print(data_dict)
+    for country, regions in data_dict.items():
+        print(f"{country.capitalize()}:")
+        if isinstance(regions, dict) and regions:
+            for region, cities in regions.items():
+                print(f"  {region.capitalize()}:")
+                for city in cities:
+                    print(f"    - {city.capitalize()}")
+        else:
+            print("  No regions available.")
+        print()
 
 def main():
-    data_dict = {"thailand" : {"central" : ["bangkok"]}}
+    data_dict = {
+    "thailand": {
+        "central": ["bangkok", "suphanburi", "chainat", "ayutthaya", "nonthaburi", "pathumthani"],
+        "northeastern": ["kalasin", "khon kaen", "chaiyaphum", "ubon ratchathani", "nakhon ratchasima", "mahachai"],
+        "northern": ["chiang mai", "chiang rai", "lampang", "lamphun", "payao", "phayao"],
+        "southern": ["hat yai", "phuket", "krabi", "surat thani", "chumphon", "nakhon si thammarat"]
+    },
+    "america": {
+        "northern": ["guatemala", "el salvador", "honduras", "nicaragua", "costarica", "panama"],
+        "western": ["california", "oregon", "washington", "nevada", "utah"],
+        "eastern": ["new york", "florida", "texas", "virginia", "north carolina"],
+        "southern": ["georgia", "alabama", "mississippi", "louisiana", "tennessee"]
+    }
+}
 
     while True:
         print("================================")
@@ -145,7 +198,7 @@ def main():
         print("================================")
         print("      enter '0' to exit         ")
         print("================================")
-
+        
         choice = int(input("please select your choice : "))
         if choice == 0:
             print(f"your choice = {choice}, program exting now!!!")
@@ -187,9 +240,9 @@ def main():
    
         elif choice == 3:
             print("=====================")
-            print("Enter 1 to update country")
-            print("Enter 2 to update region")
-            print("Enter 3 to update province")
+            print("Enter 1 to search country")
+            print("Enter 2 to search region")
+            print("Enter 3 to search province")
             print("=====================")
 
             search_choice = int(input(f"enter yout choice : "))
@@ -198,7 +251,7 @@ def main():
                 search_country(data_dict)
             elif search_choice  == 2:
                 search_region(data_dict)
-            elif update_choice == 3:
+            elif search_choice == 3:
                 search_province(data_dict)
 
 
@@ -220,5 +273,5 @@ def main():
 
         elif choice == 5:
             view_data(data_dict)
-
+        input("Please Enter to continue ")
 main()
